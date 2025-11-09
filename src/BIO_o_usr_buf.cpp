@@ -114,10 +114,7 @@ static long o_usr_buf_ctrl(::BIO* bio, int cmd, long larg, void* parg) noexcept 
         case BIO_CTRL_FLUSH:
             return 1;
         case BIO_CTRL_WPENDING:
-            // Bytes written by upper layer and pending in this BIO's
-            // user-provided buffer that have not yet been consumed by
-            // the application (e.g., not yet sent on the socket).
-            return static_cast<long>(cb.curr - cb.head);
+            return 0;
         default:
             return 0;
     }

@@ -112,10 +112,7 @@ static long i_usr_buf_ctrl(::BIO* bio, int cmd, long larg, void* parg) noexcept 
             ::BIO_set_shutdown(bio, static_cast<int>(larg));
             return 1;
         case BIO_CTRL_PENDING:
-            // Return remaining unread bytes in the user-provided buffer so
-            // upper layers (e.g. SSL_has_pending) can make progress without
-            // forcing an extra read attempt.
-            return static_cast<long>(cb.get_cur_buf().size());
+            return 0;
         default:
             return 0;
     }
